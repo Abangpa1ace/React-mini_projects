@@ -1,24 +1,30 @@
 import './App.css';
-import React, { useState } from 'react';
-import List from './components/list'
-import Data from './components/data'
-
+import React, { useState, useEffect } from 'react';
+import Loader from './components/loader'
+import Tours from './components/tours'
 
 function App() {
-  const [birthList, setBirthList] = useState(Data);
+  const [loading, setLoading] = useState(true);
+  const [tours, setTours] = useState([]);
+  const url = 'https://course-api.com/react-tours-project';
 
-  const handleClick = () => {
-    setBirthList([]);
+  const getTours = async () => {
+    const res = await fetch(url);
+    const data = await res.json();
+    setTours(data);
   }
 
+  getTours();
+
+  useEffect(() => {
+    setLoading(false);
+  }, [tours])
+
   return (
-    <div className="App">
-      <div id="container">
-        <h1>{birthList.length} birthdays today</h1>
-        <List births={birthList} />
-        <button className="clear-btn" onClick={handleClick}>Clear All</button>
-      </div>
-    </div>
+    <section className="App">
+      <h1>Our Tours</h1>
+      <Tours tours={tours} />
+    </section>
   );
 }
 

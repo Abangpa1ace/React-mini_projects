@@ -1,12 +1,11 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Review from './components/review'
 import data from './components/data'
 
 function App() {
   const reviewList = data;
-  const init = 0;
-  const [reviewIndex, setReviewIndex] = useState(init);
+  const [reviewIndex, setReviewIndex] = useState(0);
 
   const changeIndex = (btnClass) => {
     let nextIndex;

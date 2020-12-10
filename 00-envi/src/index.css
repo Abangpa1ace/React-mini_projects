@@ -31,105 +31,61 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.loader {
-  font-size: 60px;
-  color: #0c2c68;
+  width: 700px;
+  margin: 0 auto;
 }
 
 .title {
-  width: 200px;
-  font-size: 50px;
-  position: relative;
+  font-size: 36px;
+  text-transform: uppercase;
 }
 
-.title::after {
-  content: '';
-  position: absolute;
-  width: 40%;
-  left: 50%;
-  bottom: -15px;
-  transform: translateX(-50%);
-  background: #c47226;
-  height: 4px;
+.count-form {
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+}
+
+.count-form span {
+  font-size: 20px;
+  color: #1d6483;
+}
+
+.count-form input {
+  width: 70px;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  padding: 5px;
+  margin: auto 10px;
+  color: #000000;
+}
+
+.count-form button {
+  color: #1d6483;
+  background: #85c1db;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .3s ease;
+  font-size: 18px;
+  padding: 5px 15px;
+  border: none;
+}
+
+.count-form button:hover {
+  color: #f2fbff;
+  background: #1d6483;
 }
 
 #container {
   margin-top: 50px;
-  width: 1000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.slide-btn {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  color: #ffffff;
-  background: #4e7f94;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: all .3s ease;
-}
-
-.slide-btn:hover {
-  background: #c47226;
-}
-
-.review-container {
-  position: relative;
-  width: 860px;
-  height: 500px;
-  margin: 0px 30px;
-  display: flex;
-  overflow: hidden;
-}
-
-.review {
-  position: absolute;
   width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+}
+
+.paragraph {
+  color: #1d6483;
   font-size: 18px;
-  transition: all .3s ease;
-  opacity: 0;
-}
-
-.review.activeSlide {
-  opacity: 1;
-  transform: translateX(0);
-}
-.review.lastSlide {
-  transform: translateX(-100%);
-}
-.review.nextSlide {
-  transform: translateX(100%);
-}
-
-.review-img {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 5px solid #badbe9;
-}
-
-.review-title {
-  margin: 20px 0 10px;
-  color: #c47226;
-}
-
-.review-quote {
-  color: #4e7f94;
-  line-height: 2;
-  margin: 40px auto 20px;
-}
-
-.review-comma {
-  color: #c47226;
-  font-size: 50px;
+  line-height: 1.5;
+  margin: 30px auto;
+  width: 100%;
 }

@@ -1,47 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import Review from './components/review'
-import People from './components/data'
+import React, { useState } from 'react';
+import Text from './components/data'
+import Paragraph from './components/paragraph'
 
 function App() {
-  const [peoples, setPeoples] = useState();
-  const [index, setIndex] = useState(0);
-  setPeoples(People);
-  
-  // 정답 참고부분
-  useEffect(() => {
-    const lastIndex = peoples.length - 1;
-    if (index < 0) {
-      setIndex(lastIndex);
-    }
-    if (index > lastIndex) {
-      setIndex(0);
-    }
-  }, [index, peoples]);
-  // 정답 참고부분
+  const [text, setText] = useState([]);
+  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    const indexInterval = setInterval(() => {
-      setIndex(index + 1);
-    }, 5000);
-    return () => clearInterval(indexInterval)
-  }, [index])
+  const checkCount = (e) => {
+    setCount(e.target.value);
+    if (e.target.value > Text.length) {
+      setCount(Text.length)
+    }
+  }
 
+  const submitCount = (e) => {
+    e.preventDefault();
+    // 정답 참고부분
+    setText(Text.slice(0, count))
+  }
 
   return (
     <section className="App">
-      <h2 className="title">Reviews</h2>
+      <h3 className="title">Tired of Boring Lorem Ipsum?</h3>
+      <form className="count-form" onSubmit={(e) => submitCount(e)}>
+        <span>Paragraphs: </span>
+        <input type="number" placeholder={count} onChange={(e) => checkCount(e)}></input>
+        <button type="submit">Generate</button>
+      </form>
       <div id="container">
-        <button className="slide-btn prev" onClick={() => setIndex(index - 1)}>◀︎</button>
-        <article className="review-container">
-          {peoples.map((people, peopleIndex) => {
-            return <Review people={people} peopleIndex={peopleIndex} index={index} key={people.id}/>
-          })}
-        </article>
-        <button className="slide-btn next" onClick={() => setIndex(index + 1)}>▶︎</button>
+        {text.map((paragraph, index) => 
+          <Paragraph paragraph={paragraph} key={index} index={index} />)
+        }
       </div>
     </section>
   );
 }
-
 
 export default App;

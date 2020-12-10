@@ -1,85 +1,41 @@
-# 07. Slider : Feedback
+# 08. Lorem Ipsum : Feedback
 
 ## HTML/CSS
 
-### 1. Slider 만들기 : position, transition(translateX + opacity)
-
-* 부모요소에는, {position: relative}, {overflow: hidden} 부여! relative 때문에 width/height 값 필요
-.review-container {
-  position: relative;
-  width: 860px;
-  height: 500px;
-  margin: 0px 30px;
-  display: flex;
-  overflow: hidden;
-}
-
-* 자식요소는, 전체적으로 {position: absolute}, width/height 100%, left/top 0, {opacity: 0} 을 준다.
-.review {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  font-size: 18px;
-  transition: all .3s ease;
-  opacity: 0;
-}
-
-* activeSlide 만 opacity 1, translateX(0)
-  lastSlide -> translateX(-100%), nextSlide -> translateX(100%)
-.review.activeSlide {
-  opacity: 1;
-  transform: translateX(0);
-}
-.review.lastSlide {
-  transform: translateX(-100%);
-}
-.review.nextSlide {
-  transform: translateX(100%);
-}
-
-각각의 슬라이드 클래스는 기본적으로 nextSlide, React의 index 조건에 따라 activeSlide, lastSlide 를 부여한다. (JS/React 1번 참고)
-
+### 1. 글자 자간, 줄간격 조절 : letter-spacing, line-height
 
 
 ## JS/React
 
 ### 0. 파일구성
-App.js 에서 전체를 구현했다. <Review /> 컴포넌트를 분리했다가 (peopleIndex, index) 비교를 위해 props가 증가하는 역효과가 발생했다.
+App.js 에서 전체를 구현했다. 딱히, <Paragraph /> 가 필요없긴 했다.
 
-### 1. Review.js / Slider 만들기(index 따른 class 부여)
-index(state)와 peoples의 index 들을 비교하여, map 처리간 클래스를 부여한다.
+### 1. App.js / count(state) 관리 방법
+나는 onChange 단계에서 최대값을 감지했는데, 정답은 onSubmit에서 조건을 걸었다. (<=0 이면 1, >8 이면 8)
+이후, 이를 활용한 slice 처리. 결과적으로 메소드가 하나 줄어든 깔끔한 코드!
 
-// 1) 기본은 nextSlide
-let position = 'nextSlide';
-// 2) index와 같아야 activeSlide
-if (peopleIndex === index) {
-  position = 'activeSlide'
-}
-// 3) index-1과 같거나, index 0일 때 배열길이-1 과 같을 때
-if (
-  peopleIndex === index - 1 ||
-  (index === 0 && peopleIndex === people.length - 1)
-) {
-  position = 'lastSlide';
-}
+const handleSubmit = (e) => {
+  e.preventDefault();
+  let amount = parseInt(count);
+  if (count <= 0) {
+    amount = 1;
+  }
+  if (count > 8) {
+    amount = 8;
+  }
+  setText(data.slice(0, amount));
+};
 
-
-### 2. App.js / index(state)의 오류 방지
+### 2. App.js / <input value={state} 연결>
 useEffect 와 setIndex 세터함수로 좌우로 초과할 때 순환시킬 수 있다.
 
-useEffect(() => {
-  const lastIndex = peoples.length - 1;
-  // 좌측으로 초과 -> 오른쪽 끝으로
-  if (index < 0) {    
-    setIndex(lastIndex);
-  }
-  // 우측으로 초과 -> 왼쪽 끝으로
-  if (index > lastIndex) {
-    setIndex(0);
-  }
-}, [index, peoples]);   // index 변화, peoples 데이터 변화에 dependency
+<input
+  type='number'
+  name='amount'
+  id='amount'
+  value={count}
+  onChange={(e) => setCount(e.target.value)}
+/>
 
 
 ### 3. App.js / React의 setInterval 처리

@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#root {
+  padding: 80px;
+  background: #f2fbff;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader {
+  font-size: 60px;
+  color: #0c2c68;
+}
+
+.title {
+  width: 200px;
+  font-size: 50px;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  width: 40%;
+  left: 50%;
+  bottom: -15px;
+  transform: translateX(-50%);
+  background: #c47226;
+  height: 4px;
+}
+
+#container {
+  margin-top: 50px;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  color: #ffffff;
+  background: #4e7f94;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.slide-btn:hover {
+  background: #c47226;
+}
+
+.review-container {
+  position: relative;
+  width: 860px;
+  height: 500px;
+  margin: 0px 30px;
+  display: flex;
+  overflow: hidden;
+}
+
+.review {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  transition: all .3s ease;
+  opacity: 0;
+}
+
+.review.activeSlide {
+  opacity: 1;
+  transform: translateX(0);
+}
+.review.lastSlide {
+  transform: translateX(-100%);
+}
+.review.nextSlide {
+  transform: translateX(100%);
+}
+
+.review-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #badbe9;
+}
+
+.review-title {
+  margin: 20px 0 10px;
+  color: #c47226;
+}
+
+.review-quote {
+  color: #4e7f94;
+  line-height: 2;
+  margin: 40px auto 20px;
+}
+
+.review-comma {
+  color: #c47226;
+  font-size: 50px;
+}

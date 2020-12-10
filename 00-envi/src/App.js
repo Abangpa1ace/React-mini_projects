@@ -1,36 +1,30 @@
 import React, { useState } from 'react';
-import Text from './components/data'
-import Paragraph from './components/paragraph'
+import Colors from './components/data'
+
 
 function App() {
-  const [text, setText] = useState([]);
-  const [count, setCount] = useState(0);
-
-  const checkCount = (e) => {
-    setCount(e.target.value);
-    if (e.target.value > Text.length) {
-      setCount(Text.length)
-    }
-  }
-
-  const submitCount = (e) => {
-    e.preventDefault();
-    // 정답 참고부분
-    setText(Text.slice(0, count))
-  }
+  const [color, setColor] = useState('#f15025');
 
   return (
     <section className="App">
-      <h3 className="title">Tired of Boring Lorem Ipsum?</h3>
-      <form className="count-form" onSubmit={(e) => submitCount(e)}>
-        <span>Paragraphs: </span>
-        <input type="number" placeholder={count} onChange={(e) => checkCount(e)}></input>
-        <button type="submit">Generate</button>
+      <form className="color-form" onSubmit>
+        <span>Color Generator </span>
+        <input type="text" placeholder={color}></input>
+        <button type="submit">Submit</button>
       </form>
       <div id="container">
-        {text.map((paragraph, index) => 
-          <Paragraph paragraph={paragraph} key={index} index={index} />)
-        }
+        <div className="color-box">
+          <p>100%</p>
+          <p>#ffffff</p>
+        </div>
+        <div className="color-box">
+          <p>100%</p>
+          <p>#ffffff</p>
+        </div>
+        <div className="color-box">
+          <p>100%</p>
+          <p>#ffffff</p>
+        </div>
       </div>
     </section>
   );

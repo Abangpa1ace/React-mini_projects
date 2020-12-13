@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  background-image: url('./components//images/hero.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: -400px -200px;
+  z-index: -10;
+}
+
+.App {
+  width: 1300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+#header {
+  position: absolute;
+  top: 0;
+  width: 1300px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo {
+  background-image: url('./components/images/logo.svg');
+  width: 110px;
+  height: 50px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  color: #ffffff;
+  text-shadow: 1px 1px 3px pink;
+  height: 100%;
+  font-size: 24px;
+  margin: 0 30px;
+  transition: all .3s ease;
+}
+
+.menu:hover {
+  color: #92ec92;
+}
+
+.sign-btn, .start-btn {
+  background: #373737;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.sign-btn:hover, .start-btn:hover {
+  background: #ffffff;
+  color: #373737;
+}
+
+#main {
+  padding-top: 70px;
+  width: 1300px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 95%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-repeat: none;
+}
+
+.text-container {
+  width: 800px;
+  margin-right: 180px;
+}
+
+.text-container h1 {
+  font-size: 110px;
+  line-height: 1;
+  color: #0a3444;
+}
+
+.text-container p {
+  font-size: 24px;
+  color: #7a7a7a;
+  line-height: 1.5;
+  margin: 40px 0 20px;
+}
+
+.phone-container {
+  background-image: url('./components/images/phone.svg');
+  width: 260px;
+  height: 535px;
+  transform: scale(1.3);
+}

@@ -28,161 +28,107 @@ button {
 }
 
 #root {
-  background: #f2fbff;
+  width: 100%;
   height: 100vh;
+  background-image: url('./components//images/hero.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: -400px -200px;
+  z-index: -10;
 }
 
 .App {
-  width: 100%;
+  width: 1300px;
   height: 100%;
-  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
   position: relative;
 }
 
-.side-btn {
+#header {
   position: absolute;
-  left: 40px;
-  top: 40px;
-  font-size: 40px;
-  color: #0098da;
-  animation: btn_scale 2s linear infinite;
+  top: 0;
+  width: 1300px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
 }
 
-@keyframes btn_scale {
-  0%, 100% {transform: scale(1);}
-  50% {transform: scale(1.5);}
+.logo {
+  background-image: url('./components/images/logo.svg');
+  width: 110px;
+  height: 50px;
 }
 
-.modal-btn {
-  font-size: 20px;
+.nav-bar {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
   color: #ffffff;
-  background: #242424;
-  padding: 5px 15px;
-  border-radius: 5px;
-  border: 4px solid #242424;
+  text-shadow: 1px 1px 3px pink;
+  height: 100%;
+  font-size: 24px;
+  margin: 0 30px;
   transition: all .3s ease;
 }
 
-.modal-btn:hover {
-  color: #242424;
-  background: #ffffff;
+.menu:hover {
+  color: #92ec92;
 }
 
-/* modal design */
-#modal-container {
+.sign-btn, .start-btn {
+  background: #373737;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.sign-btn:hover, .start-btn:hover {
+  background: #ffffff;
+  color: #373737;
+}
+
+#main {
+  padding-top: 70px;
+  width: 1300px;
   position: absolute;
-  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 200;
-}
-
-.modal-content {
-  width: 500px;
-  height: 300px;
-  background: #ffffff;
-  border-radius: 5px;
-  color: #0c267c;
-  font-size: 28px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.close-modal-btn, .close-sidebar-btn {
-  color: #c21a1a;
-  font-size: 24px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-weight: bold;
-  transition: all .3s ease;
-  text-transform: uppercase;
-}
-
-.close-modal-btn:hover, .close-sidebar-btn:hover {
-  color: #ffafaf;
-}
-
-/* sidebar design */
-#sidebar-container {
-  position: absolute;
   top: 0;
-  left: 0%;
-  width: 400px;
-  height: 100%;
-  background: #ffffff;
+  height: 95%;
   display: flex;
-  flex-direction: column;
-  transform: translateX(-100%);
-  transition: transform .6s ease;
+  justify-content: flex-start;
+  align-items: center;
+  background-repeat: none;
 }
 
-#sidebar-container.show {
-  transform: translateX(0%);
+.text-container {
+  width: 800px;
+  margin-right: 180px;
 }
 
-.title {
-  font-size: 28px;
-  letter-spacing: 0.1em;
-  text-shadow: 0px 5px 5px #c7c7c7;
-  padding: 20px;
-  margin-bottom: 40px;
+.text-container h1 {
+  font-size: 110px;
+  line-height: 1;
+  color: #0a3444;
 }
 
-.title span {
-  color: #0098da;
-}
-
-.link-list li {
-  width: 100%;
-  padding: 20px 0 20px 20px;
+.text-container p {
   font-size: 24px;
-  text-transform: capitalize;
-  color: #475680;
-  display: flex;
-  align-items: center;
-  transition: all .3s ease;
+  color: #7a7a7a;
+  line-height: 1.5;
+  margin: 40px 0 20px;
 }
 
-.link-list a {
-  color: #475680;
-  margin-left: 20px;
-}
-
-.link-list li:hover {
-  background: #b8d2f5;
-}
-
-.social-list {
-  width: 100%;
-  position: absolute;
-  bottom: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.social-list li {
-  margin: 0 10px;
-}
-
-.social-list a {
-  color: #2baefa;
-  font-size: 28px;
-  transition: all .3s ease;
-}
-
-.social-list li:hover a {
-  color: #1c19b8;
+.phone-container {
+  background-image: url('./components/images/phone.svg');
+  width: 260px;
+  height: 535px;
+  transform: scale(1.3);
 }

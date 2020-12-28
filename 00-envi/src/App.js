@@ -1,14 +1,36 @@
-import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import Home from './pages/home'
-import About from './pages/about'
+import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 function App() {
+  const [inputText, setInputText] = useState('# Markdown preview');
+
+  const updateInput = (e) => {
+    setInputText(e.target.value);
+  }
+
   return (
-    <Router>
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-    </Router>
+    <div className="App">
+      <textarea type="textarea" className="input" value={inputText} onChange={updateInput} />
+      <div className="output">
+        {/* {inputText.split('\n').map(line => {
+            if (line.substr(0,1) === '#') {
+              if (line.length === 1) {
+                return (<span></span>)
+              }
+              else if (line.substr(0,2) === '# ') {
+                return (<h1>{line.substring(2, line.length)}<br/></h1>)
+              }
+              else {
+                return (<span>{line}<br/></span>)
+              }
+            }
+            else {
+              return (<span>{line}<br/></span>)
+            }
+          })} */}
+          <ReactMarkdown>{inputText}</ReactMarkdown>
+      </div>
+    </div>
   );
 }
 

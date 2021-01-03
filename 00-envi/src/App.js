@@ -1,75 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { FaCalendarTimes, FaMap, FaPhone } from 'react-icons/fa';
-import { BsFillLockFill, BsFillPersonFill } from 'react-icons/bs';
-import { HiMailOpen } from 'react-icons/hi';
+import Loader from './components/loader';
+import Profile from './components/profile';
 
 function App() {
-  const url = 'https://randomuser.me/api/'
-  const defaultImg = 'https://randomuser.me/api/portraits/men/75.jpg'
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({
-    id : 'default',
-    img: defaultImg,
-    name : 'Default Name',
-    email : 'no value',
-    age : 'no value',
-    address : 'no value',
-    phone : 'no value',
-    password : 'no value',
-  });
-  const [focus, setFocus] = useState('name')
+  const [load, setLoad] = useState(false);
+  const [profs, setProfs] = useState([[],[],[],[],[],[],[],[],[],[]]);
+  const [page, setPage] = useState(0);
+
+  const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
 
   const fetchData = async () => {
-    setLoading(true);
+    setLoad(true);
+    let profList = [[],[],[],[],[],[],[],[],[],[]];
     const res = await fetch(url);
     const data = await res.json();
-    const info = data.results[0];
-    setUser({
-      id: info.id.value,
-      img: info.picture.large,
-      name : info.name.last + ' ' + info.name.first,
-      email : info.email,
-      age : info.dob.age,
-      address : info.location.street.name + ' ' + info.location.street.number,
-      phone : info.phone,
-      password : info.login.password,
-    })
-    setFocus('name');
-    setLoading(false);
-  }
-
-  const handleHover = (val) => {
-    setFocus(val)
+    for (let i = 0 ; i < 10 ; i++) {
+      for (let j = 0 ; j < 10 ; j++) {
+        profList[i].push(data[i*10 + j]);
+      }
+    }
+    setProfs(profList);
+    setLoad(false);
   }
 
   useEffect(() => {
     fetchData()
   }, [])
 
+  const goPrev = () => {
+    setPage((page === 0) ? profs.length - 1 : page - 1)
+  }
+
+  const goNext = () => {
+    setPage((page + 1) % profs.length)
+  }
+
+  if (load) {
+    return <Loader load={load} />
+  }
 
   return (
     <div className="App">
-      <div className="user-container">
-        <header>
-          <div className="user-img-container">
-            <img alt="user-img" src={user.img} className="user-img" />
-          </div>
-        </header>
-        <footer>
-          <p>My {focus} is</p>
-          <h2>{user[focus]}</h2>
-          <div className="btn-container">
-            <button onMouseEnter={(e) => handleHover('name')}><BsFillPersonFill /></button>
-            <button onMouseEnter={(e) => handleHover('email')}><HiMailOpen /></button>
-            <button onMouseEnter={(e) => handleHover('age')}><FaCalendarTimes /></button>
-            <button onMouseEnter={(e) => handleHover('address')}><FaMap /></button>
-            <button onMouseEnter={(e) => handleHover('phone')}><FaPhone /></button>
-            <button onMouseEnter={(e) => handleHover('password')}><BsFillLockFill /></button>
-          </div>
-          <button className="random-btn" onClick={fetchData}>
-            {loading ? 'Loading...' : 'Random User'}
-          </button>
-        </footer>
+      <h1>Pagination</h1>
+      <div className="prof-container">
+        {profs[page].map((prof) => {return <Profile profile={prof} />})}
+      </div>
+      <div className="btn-container">
+        <button className="pn-btn" onClick={() => goPrev()}>prev</button>
+        {profs.map((ele, idx) => {
+          return <button className={`page-btn ${idx === page && 'show'}`} onClick={() => {setPage(idx)}}>{idx+1}</button>
+        })}
+        <button className="pn-btn" onClick={() => goNext()}>next</button>
       </div>
     </div>
   );

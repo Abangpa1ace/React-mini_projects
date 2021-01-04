@@ -1,59 +1,94 @@
-import React, { useState, useEffect } from 'react';
-import Loader from './components/loader';
-import Profile from './components/profile';
+  
+import React, { useState, useEffect } from 'react'
+import { FaSearch } from 'react-icons/fa'
+
+import Photo from './Photo'
+const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`
+const mainUrl = `https://api.unsplash.com/photos/`
+const searchUrl = `https://api.unsplash.com/search/photos/`
 
 function App() {
-  const [load, setLoad] = useState(false);
-  const [profs, setProfs] = useState([[],[],[],[],[],[],[],[],[],[]]);
-  const [page, setPage] = useState(0);
-
-  const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
-
-  const fetchData = async () => {
-    setLoad(true);
-    let profList = [[],[],[],[],[],[],[],[],[],[]];
-    const res = await fetch(url);
-    const data = await res.json();
-    for (let i = 0 ; i < 10 ; i++) {
-      for (let j = 0 ; j < 10 ; j++) {
-        profList[i].push(data[i*10 + j]);
-      }
+  const [loading, setLoading] = useState(false)
+  const [photos, setPhotos] = useState([])
+  const [page, setPage] = useState(0)
+  const [query, setQuery] = useState('')
+  const fetchImages = async () => {
+    setLoading(true)
+    let url
+    const urlPage = `&page=${page}`
+    const urlQuery = `&query=${query}`
+    if (query) {
+      url = `${searchUrl}${clientID}${urlPage}${urlQuery}`
+    } else {
+      url = `${mainUrl}${clientID}${urlPage}`
     }
-    setProfs(profList);
-    setLoad(false);
+    try {
+      const response = await fetch(url)
+      const data = await response.json()
+      setPhotos((oldPhotos) => {
+        if (query && page === 1) {
+          return data.results
+        } else if (query) {
+          return [...oldPhotos, ...data.results]
+        } else {
+          return [...oldPhotos, ...data]
+        }
+      })
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
   }
+  useEffect(() => {
+    fetchImages()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page])
 
   useEffect(() => {
-    fetchData()
+    const event = window.addEventListener('scroll', () => {
+      if (
+        (!loading && window.innerHeight + window.scrollY) >=
+        document.body.scrollHeight - 2
+      ) {
+        setPage((oldPage) => {
+          return oldPage + 1
+        })
+      }
+    })
+    return () => window.removeEventListener('scroll', event)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const goPrev = () => {
-    setPage((page === 0) ? profs.length - 1 : page - 1)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setPage(1)
   }
-
-  const goNext = () => {
-    setPage((page + 1) % profs.length)
-  }
-
-  if (load) {
-    return <Loader load={load} />
-  }
-
   return (
-    <div className="App">
-      <h1>Pagination</h1>
-      <div className="prof-container">
-        {profs[page].map((prof) => {return <Profile profile={prof} />})}
-      </div>
-      <div className="btn-container">
-        <button className="pn-btn" onClick={() => goPrev()}>prev</button>
-        {profs.map((ele, idx) => {
-          return <button className={`page-btn ${idx === page && 'show'}`} onClick={() => {setPage(idx)}}>{idx+1}</button>
-        })}
-        <button className="pn-btn" onClick={() => goNext()}>next</button>
-      </div>
-    </div>
-  );
+    <main>
+      <section className='search'>
+        <form className='search-form'>
+          <input
+            type='text'
+            placeholder='search'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className='form-input'
+          />
+          <button type='submit' className='submit-btn' onClick={handleSubmit}>
+            <FaSearch />
+          </button>
+        </form>
+      </section>
+      <section className='photos'>
+        <div className='photos-center'>
+          {photos.map((image, index) => {
+            return <Photo key={index} {...image} />
+          })}
+        </div>
+        {loading && <h2 className='loading'>Loading...</h2>}
+      </section>
+    </main>
+  )
 }
 
-export default App;
+export default App

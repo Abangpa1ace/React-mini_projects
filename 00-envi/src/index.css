@@ -6,7 +6,6 @@ body {
   padding: 0;
   margin: 0;
   list-style: none;
-  outline: none;
   box-sizing: border-box;
   color: #242424;
   font-size: 16px;
@@ -18,77 +17,87 @@ button {
   border: none;
   background: transparent;
   cursor: pointer;
+  outline: none;
 }
 
 #root {
   height: 100vh;
-}
-
-.App {
-  height: 100%;
-  padding: 20px;
-  background: #fcfcfc;
-  transition: all .5s ease;
+  padding: 100px;
+  background: #e7edf1;
 }
 
 .container {
-  width: 600px;
+  width: 1200px;
   margin: 0 auto;
 }
 
-.nav {
-  position: sticky;
-  top: 0;
-  padding: 40px 0;
+h1 {
+  font-size: 36px;
+  color: #122A42;
 }
 
-.nav-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.search-bar {
   width: 600px;
+  padding: 15px;
+  margin: 20px 0 40px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid #BCCCDB;
+  font-size: 18px;
 }
 
-.nav-content h1 {
-  font-size: 40px;
+.page-controller {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 40px;
 }
 
-.nav-content button {
-  padding: 5px 10px;
-  background: #D33668;
+.page-controller button {
+  padding: 5px;
+  background: #4AA6E8;
   color: #ffffff;
   border-radius: 5px;
+}
+
+.page-counter {
+  margin: 0 20px;
+  color: #334D67;
+  font-size: 20px;
   font-weight: bold;
 }
 
-.lorem-container {
-  margin-top: 50px;
+.news-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
 }
 
-.lorem {
-  margin-bottom: 40px;
-  line-height: 1.5;
+.news {
+  padding: 20px 30px;
+  background: #ffffff;
+  border-radius: 5px;
 }
 
-.lorem h2 {
-  color: #D33668;
-  font-size: 28px;
+.news h6 {
+  color: #122A42;
+  font-size: 18px;
 }
 
-/* Dark Mode */
-.App.dark {
-  background: #282d35;
+.news p {
+  margin: 5px 0 10px;
+  color: #627D98;
+  font-weight: 500;
 }
 
-.App.dark .nav-content h1, .App.dark .lorem * {
-  color: #ffffff;
+.news span a {
+  margin-right: 10px;
+  color: #4AA6E8;
+  font-size: 14px;
 }
 
-.App.dark .nav-content button {
-  background: #fac1d3;
-  color: #282d35;
+.news button {
+  color: #a01111;
+  font-size: 14px;
 }
 
-.App.dark .lorem h2 {
-  color: #fac1d3;
-}

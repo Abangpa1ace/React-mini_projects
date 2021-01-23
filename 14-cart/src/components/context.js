@@ -15,7 +15,7 @@ const initialState = {
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   
-  
+
   const onLoad = () => {
     dispatch({ type: 'loading' })
   }
